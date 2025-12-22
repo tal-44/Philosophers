@@ -6,6 +6,8 @@ CFLAGS = -Wall -Wextra -Werror -pthread -I./includes
 
 SRCS = src/main.c \
 		src/philo.c \
+		src/utils/init.c \
+		src/utils/check_finish.c \
 		src/utils/cast.c \
 		src/utils/utilsa.c \
 		src/utils/utilsb.c \
