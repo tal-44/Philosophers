@@ -4,7 +4,13 @@ NAME = philo
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -pthread -I./includes
 
-SRCS = src/main.c src/philo.c src/utils/cast.c src/utils/utilsa.c
+SRCS = src/main.c \
+		src/philo.c \
+		src/utils/cast.c \
+		src/utils/utilsa.c \
+		src/utils/utilsb.c \
+		src/utils/utilsc.c \
+
 OBJS = $(SRCS:src/%.c=obj/%.o)
 
 all: $(NAME)
