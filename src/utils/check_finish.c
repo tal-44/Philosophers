@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_monitor.c                                    :+:      :+:    :+:   */
+/*   check_finish.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juanm <juanm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 13:05:28 by jmiguele          #+#    #+#             */
-/*   Updated: 2025/12/22 20:12:32 by juanm            ###   ########.fr       */
+/*   Updated: 2026/01/05 15:36:10 by juanm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,18 @@
 int	check_philosopher_death(t_philo *philo, t_constants *consts)
 {
 	long	last_meal;
+	long	timestamp;
 
-	if (consts->num_meals != -1 
-		&& get_meals_eaten(philo, consts) >= consts->num_meals)
+	if (consts->num_meals != -1 && get_meals_eaten(philo,
+			consts) >= consts->num_meals)
 		return (0);
 	last_meal = get_last_meal(philo, consts);
 	if (last_meal + consts->time_td < get_current_time())
 	{
-		safe_print("died", philo->id, consts);
+		pthread_mutex_lock(&consts->print_lock);
+		timestamp = get_current_time() - consts->start_time;
+		printf("%ld %d died\n", timestamp, philo->id);
+		pthread_mutex_unlock(&consts->print_lock);
 		stop_simulation(consts);
 		return (1);
 	}
@@ -38,8 +42,8 @@ int	count_finished_philosophers(t_philo **philosophers, t_constants *consts)
 	done = 0;
 	while (i < consts->num_philos)
 	{
-		if (consts->num_meals != -1 
-			&& get_meals_eaten(philosophers[i], consts) >= consts->num_meals)
+		if (consts->num_meals != -1 && get_meals_eaten(philosophers[i],
+				consts) >= consts->num_meals)
 			done++;
 		i++;
 	}
@@ -48,8 +52,8 @@ int	count_finished_philosophers(t_philo **philosophers, t_constants *consts)
 
 void	check_finish(t_philo **philosophers, t_constants *consts)
 {
-	int i;
-	int done;
+	int	i;
+	int	done;
 
 	while (!is_simulation_stopped(consts))
 	{

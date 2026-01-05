@@ -2,9 +2,12 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   utilsa.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jmiguele <jmiguele@student.42madrid.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: jmiguele <jmiguele@student.42madrid.com    +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
 /*   Created: 2025/12/22 13:23:30 by jmiguele          #+#    #+#             */
 /*   Updated: 2025/12/22 13:23:30 by jmiguele         ###   ########.fr       */
 /*                                                                            */
@@ -12,11 +15,12 @@
 
 #include "philo.h"
 
+
 int	ft_atoi(const char *str)
 {
-	int		i;
-	long	num;
-	int		sign;
+	int i;
+	long num;
+	int sign;
 
 	i = 0;
 	num = 0;
@@ -39,7 +43,7 @@ int	ft_atoi(const char *str)
 
 void	my_sleep(long milliseconds)
 {
-	long	start_time;
+	long start_time;
 
 	start_time = get_current_time();
 	while (get_current_time() - start_time < milliseconds)
@@ -48,7 +52,7 @@ void	my_sleep(long milliseconds)
 
 int	get_has_finished(t_philo *philo, t_constants *consts)
 {
-	int	result;
+	int result;
 
 	pthread_mutex_lock(&consts->data_locks[philo->id - 1]);
 	result = philo->has_finished;
@@ -65,10 +69,17 @@ void	set_has_finished(t_philo *philo, t_constants *consts, int value)
 
 void	safe_print(const char *msg, int id, t_constants *consts)
 {
-	long	timestamp;
+	long timestamp;
+	int stopped;
 
-	pthread_mutex_lock(&consts->print_lock);
-	timestamp = get_current_time() - consts->start_time;
-	printf("%ld %d %s\n", timestamp, id, msg);
-	pthread_mutex_unlock(&consts->print_lock);
+	pthread_mutex_lock(&consts->stop_lock);
+	stopped = consts->stopped;
+	pthread_mutex_unlock(&consts->stop_lock);
+	if (!stopped)
+	{
+		pthread_mutex_lock(&consts->print_lock);
+		timestamp = get_current_time() - consts->start_time;
+		printf("%ld %d %s\n", timestamp, id, msg);
+		pthread_mutex_unlock(&consts->print_lock);
+	}
 }
