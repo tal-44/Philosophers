@@ -2,14 +2,11 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+        
-	+:+     */
-/*   By: jmiguele <jmiguele@student.42madrid.com    +#+  +:+      
-	+#+        */
-/*                                                +#+#+#+#+#+  
-	+#+           */
-/*   Created: 2025/12/22 13:10:36 by jmiguele          #+#    #+#             */
-/*   Updated: 2025/12/22 13:10:36 by jmiguele         ###   ########.fr       */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmiguele <jmiguele@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/07 13:33:13 by jmiguele          #+#    #+#             */
+/*   Updated: 2026/01/07 13:33:13 by jmiguele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,54 +21,47 @@
 
 typedef struct s_constants
 {
-	int num_philos;
-	int time_td;
-	int time_te;
-	int time_ts;
-	int num_meals;
-	pthread_mutex_t *forks;
-	pthread_mutex_t *data_locks;
-	pthread_mutex_t print_lock;
-	pthread_mutex_t stop_lock;
-	int stopped;
-	long start_time;
-} t_constants;
+	int				num_philos;
+	int				time_td;
+	int				time_te;
+	int				time_ts;
+	int				num_meals;
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	*data_locks;
+	pthread_mutex_t	print_lock;
+	pthread_mutex_t	stop_lock;
+	int				stopped;
+	long			start_time;
+}	t_constants;
 
 typedef struct s_philosopher
 {
-	pthread_t thread;
-	int id;
-	pthread_mutex_t *left_fork;
-	pthread_mutex_t *right_fork;
-	long last_meal_time;
-	int meals_eaten;
-	int has_finished;
-	t_constants *consts;
-} t_philo;
+	pthread_t		thread;
+	int				id;
+	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	*right_fork;
+	long			last_meal_time;
+	int				meals_eaten;
+	int				has_finished;
+	t_constants		*consts;
+}	t_philo;
 
 long	get_current_time(void);
-int	ft_atoi(const char *str);
-int	cast_args(int argc, char **argv, t_constants *constants);
+int		ft_atoi(const char *str);
+int		cast_args(int argc, char **argv, t_constants *constants);
 void	my_sleep(long milliseconds);
 long	get_last_meal(t_philo *philo, t_constants *consts);
 void	set_last_meal(t_philo *philo, t_constants *consts, long time);
-int	get_meals_eaten(t_philo *philo, t_constants *consts);
+int		get_meals_eaten(t_philo *philo, t_constants *consts);
 void	increment_meals(t_philo *philo, t_constants *consts);
-int	get_has_finished(t_philo *philo, t_constants *consts);
 void	set_has_finished(t_philo *philo, t_constants *consts, int value);
 void	safe_print(const char *msg, int id, t_constants *consts);
-int	is_simulation_stopped(t_constants *consts);
+int		is_simulation_stopped(t_constants *consts);
 void	stop_simulation(t_constants *consts);
 void	cleanup_all(t_philo **philos, t_constants *consts);
-int	handle_single_philo(t_philo *filo, t_constants *consts);
-int	philosopher_eat(t_philo *filo, t_constants *consts);
-int	vida_filosofo(t_philo *filo);
+int		vida_filosofo(t_philo *filo);
 void	take_forks(t_philo *filo, t_constants *consts);
-void	init_philosopher(t_philo **philos, int i, t_constants *constants,
-		long start_time);
-int	init_all(t_constants *constants);
-int	check_philosopher_death(t_philo *philo, t_constants *consts);
-int	count_finished_philosophers(t_philo **philosophers, t_constants *consts);
+int		init_all(t_constants *constants);
 void	check_finish(t_philo **philosophers, t_constants *consts);
 
 #endif

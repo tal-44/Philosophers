@@ -2,23 +2,19 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+
-	+:+     */
-/*   By: jmiguele <jmiguele@student.42madrid.com    +#+  +:+
-	+#+        */
-/*                                                +#+#+#+#+#+
-	+#+           */
-/*   Created: 2025/12/22 13:05:28 by jmiguele          #+#    #+#             */
-/*   Updated: 2025/12/22 13:05:28 by jmiguele         ###   ########.fr       */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmiguele <jmiguele@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/07 13:30:23 by jmiguele          #+#    #+#             */
+/*   Updated: 2026/01/07 13:30:23 by jmiguele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-
 long	get_current_time(void)
 {
-	struct timeval tv;
+	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
@@ -26,7 +22,7 @@ long	get_current_time(void)
 
 void	cleanup_all(t_philo **philos, t_constants *consts)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < consts->num_philos)
@@ -49,7 +45,7 @@ void	cleanup_all(t_philo **philos, t_constants *consts)
 	free(philos);
 }
 
-int	handle_single_philo(t_philo *filo, t_constants *consts)
+static int	handle_single_philo(t_philo *filo, t_constants *consts)
 {
 	safe_print("is thinking", filo->id, consts);
 	pthread_mutex_lock(filo->left_fork);
@@ -59,7 +55,7 @@ int	handle_single_philo(t_philo *filo, t_constants *consts)
 	return (0);
 }
 
-int	philosopher_eat(t_philo *filo, t_constants *consts)
+static int	philosopher_eat(t_philo *filo, t_constants *consts)
 {
 	take_forks(filo, consts);
 	if (is_simulation_stopped(consts))
@@ -85,7 +81,7 @@ int	philosopher_eat(t_philo *filo, t_constants *consts)
 
 int	vida_filosofo(t_philo *filo)
 {
-	t_constants *consts;
+	t_constants	*consts;
 
 	consts = filo->consts;
 	set_last_meal(filo, consts, get_current_time());

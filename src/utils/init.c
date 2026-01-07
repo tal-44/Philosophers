@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_init.c                                       :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juanm <juanm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jmiguele <jmiguele@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 13:05:28 by jmiguele          #+#    #+#             */
-/*   Updated: 2025/12/22 20:12:32 by juanm            ###   ########.fr       */
+/*   Updated: 2026/01/07 14:18:09 by jmiguele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	init_philosopher(t_philo **philos, int i, t_constants *constants,
+static void	init_philosopher(t_philo **philos, int i, t_constants *constants,
 		long start_time)
 {
 	philos[i] = malloc(sizeof(t_philo));
@@ -29,9 +29,9 @@ void	init_philosopher(t_philo **philos, int i, t_constants *constants,
 
 int	init_all(t_constants *constants)
 {
-	int i;
-	t_philo **philos;
-	long start_time;
+	int		i;
+	t_philo	**philos;
+	long	start_time;
 
 	philos = malloc(sizeof(t_philo *) * constants->num_philos);
 	if (!philos)

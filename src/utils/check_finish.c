@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_finish.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juanm <juanm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jmiguele <jmiguele@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 13:05:28 by jmiguele          #+#    #+#             */
-/*   Updated: 2026/01/05 15:36:10 by juanm            ###   ########.fr       */
+/*   Updated: 2026/01/07 14:19:54 by jmiguele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	check_philosopher_death(t_philo *philo, t_constants *consts)
+static int	check_philosopher_death(t_philo *philo, t_constants *consts)
 {
 	long	last_meal;
 	long	timestamp;
@@ -33,7 +33,7 @@ int	check_philosopher_death(t_philo *philo, t_constants *consts)
 	return (0);
 }
 
-int	count_finished_philosophers(t_philo **philosophers, t_constants *consts)
+static int	count_finished_philos(t_philo **philosophers, t_constants *consts)
 {
 	int	i;
 	int	done;
@@ -57,7 +57,7 @@ void	check_finish(t_philo **philosophers, t_constants *consts)
 
 	while (!is_simulation_stopped(consts))
 	{
-		done = count_finished_philosophers(philosophers, consts);
+		done = count_finished_philos(philosophers, consts);
 		if (consts->num_meals != -1 && done == consts->num_philos)
 		{
 			pthread_mutex_lock(&consts->print_lock);

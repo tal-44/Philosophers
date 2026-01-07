@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cast.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmiguele <jmiguele@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/07 13:33:01 by jmiguele          #+#    #+#             */
+/*   Updated: 2026/01/07 13:33:01 by jmiguele         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 //// REVISAR
@@ -36,7 +48,7 @@ int	allocate_mutex_arrays(t_constants *constants)
 
 void	init_all_mutexes(t_constants *constants)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < constants->num_philos)
