@@ -30,6 +30,7 @@ int	main(int argc, char **argv)
 		printf(" tiempo que se tarda en comer) ");
 		printf("tiempo que se tarda en dormir)");
 		printf(" [numero de veces que cada filosofo debe comer]\n");
+		return (1);
 	}
 	return (0);
 }
