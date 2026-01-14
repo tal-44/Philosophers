@@ -19,18 +19,21 @@ int	main(int argc, char **argv)
 	if (argc == 5 || argc == 6)
 	{
 		if (cast_args(argc, argv, &constants) == 0)
+		{
+			printf("Error: Argumentos invalidos.\n");
 			return (1);
+		}
 		if (init_all(&constants) == 0)
+		{
+			printf("Error: Fallo en la inicializacion.\n");
 			return (1);
+		}
+		return (0);
 	}
-	else
-	{
-		printf("Se esperan los siguientes argumentos:\n\n");
-		printf("./philo (numeros de filosofos) (tiempo que se tarda en morir)");
-		printf(" tiempo que se tarda en comer) ");
-		printf("tiempo que se tarda en dormir)");
-		printf(" [numero de veces que cada filosofo debe comer]\n");
-		return (1);
-	}
-	return (0);
+	printf("Se esperan los siguientes argumentos:\n\n");
+	printf("./philo (numeros de filosofos) (tiempo que se tarda en morir)");
+	printf(" tiempo que se tarda en comer) ");
+	printf("tiempo que se tarda en dormir)");
+	printf(" [numero de veces que cada filosofo debe comer]\n");
+	return (1);
 }
