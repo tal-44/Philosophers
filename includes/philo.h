@@ -64,4 +64,11 @@ void	take_forks(t_philo *filo, t_constants *consts);
 int		init_all(t_constants *constants);
 void	check_finish(t_philo **philosophers, t_constants *consts);
 
+/* Debug functions */
+void	debug_safe_print(const char *msg, int id, t_constants *consts,
+		int extra, const char *color);
+void	debug_take_forks(t_philo *filo, t_constants *consts);
+int	debug_philosopher_eat(t_philo *filo, t_constants *consts);
+int	debug_vida_filosofo(t_philo *filo);
+
 #endif
