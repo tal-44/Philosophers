@@ -1,0 +1,7 @@
+/src/utils/debug.c
+*.o
+*.vscode/
+*.log
+*.tmp
+*.code-workspace
+*.exe
